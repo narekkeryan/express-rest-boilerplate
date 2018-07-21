@@ -1,0 +1,9 @@
+# project files
+.idea
+
+# dependencies
+node_modules/
+
+# env config files
+config/env/development.js
+config/env/production.js
