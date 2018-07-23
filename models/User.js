@@ -3,10 +3,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const Generator = require('../components/Generator');
 const UserStatuses = require('../constants/UserStatuses');
 const UserRoles = require('../constants/UserRoles');
 const ErrorMessages = require('../constants/ErrorMessages');
+const config = require('../config/env');
 
 const UserSchema = new Schema(
     {
@@ -80,3 +83,27 @@ User.validationOptions = (password) => ({
         equals: { options: password, errorMessage: ErrorMessages.RE_PASSWORD.MATCH }
     }
 });
+
+User.prototype.comparePassword = function (password = '') {
+    return this.password && bcrypt.compare(password, this.password);
+};
+
+User.prototype.enabled = function () {
+    return this.status === UserStatuses.ACTIVE;
+};
+
+User.prototype.generateToken = function () {
+    return {
+        type: 'jwt',
+        access: jwt.sign(
+            {
+                id: this.id,
+                salt: this.salt
+            },
+            config.jwtSecret,
+            {
+                expiresIn: '365d'
+            }
+        )
+    };
+};

@@ -20,5 +20,6 @@ module.exports = {
         REQUIRED:'err.rePassword.required',
         MATCH: 'err.rePassword.match',
     },
-    INVALID_CREDENTIALS: 'err.invalid.credentials'
+    INVALID_CREDENTIALS: 'err.invalid.credentials',
+    DISABLED: 'err.disabled'
 };
