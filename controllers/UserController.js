@@ -77,6 +77,18 @@ class UserController {
 
         return res.send(false);
     }
+
+    static async actionIsUnique(req, res) {
+        const data = _pick(req.body, [ 'param', 'value' ]);
+        let condition = {};
+        condition[data.param] = data.value.toLowerCase();
+        const user = await User.findOne(condition);
+        return _isEmpty(user) ? res.send(true) : res.send(false);
+    }
+
+    static actionIsLoggedIn(req, res) {
+        return res.send(true);
+    }
 }
 
 module.exports = UserController;
