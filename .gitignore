@@ -7,3 +7,6 @@ node_modules/
 # env config files
 config/env/development.js
 config/env/production.js
+
+# email credentials
+constants/Emails.js

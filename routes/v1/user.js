@@ -24,5 +24,6 @@ router.use(expressValidator({
 
 router.post('/register', UserController.actionRegister);
 router.post('/login', UserController.actionLogin);
+router.post('/activate', UserController.actionActivate);
 
 module.exports = router;

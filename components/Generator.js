@@ -8,8 +8,8 @@ class Generator {
         return Generator.string(16);
     }
 
-    static async hash(password) {
-        return await bcrypt.hash(password, 10);
+    static hash(password) {
+        return bcrypt.hash(password, 10);
     }
 
     static token() {
